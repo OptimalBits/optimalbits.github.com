@@ -1,0 +1,7 @@
+.news
+  .news-list
+    each n in locals.news
+      .news-header
+        a(href="#{n.url}") #{n.title}
+        p #{n.date}
+      .news-body #{n.content}
