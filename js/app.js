@@ -2,6 +2,8 @@ define(['jquery', 'ginger.route'], function($, ginger){
 
 $(function(){
 
+ginger.route.root = '/'
+
 ginger.route.listen(function(context){
   context.get($('body'), function(){
   
