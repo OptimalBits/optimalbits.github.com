@@ -12,7 +12,7 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
 
 #header{
   height: 128px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
   -moz-box-shadow: 0 3px 5px #959595;
   -webkit-box-shadow: 0 3px 5px #959595;
   box-shadow: 0 3px 5px #959595;
@@ -83,6 +83,7 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
   padding-right: 24px;
   padding-top: 24px;
   float: left;
+  color: #f6cb00;
 }
 
 .footer-column li{
@@ -91,22 +92,26 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
   font-size: 8pt;
   text-shadow: 1px 1px 1px #7b7b7b;
   display: block;
+  color: #ffffff;
 }
 
 #followus {
   float: right;
   padding-top: 20px;
-  padding-right: 24px;  
+  padding-right: 24px;
+  color: #16a8dc;
 }
 
 #followus li{
   font-size: 8pt;
   display: block;
+  color: #ffffff;
 }
 
 #copyright {
   text-align: right;
   font-size: 8pt;
   padding-right: 15px;
+  color: #d59388;
 }
 
