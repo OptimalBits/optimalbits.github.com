@@ -26,8 +26,12 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
   margin: auto;
 }
 
+#content-pane{
+  height: 480px;
+  overflow: auto;
+}
+
 #content{
-  height: 400px;
   margin: 24px;
   line-height: 28px;
   font-size: 12pt;
