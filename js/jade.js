@@ -640,7 +640,11 @@ module.exports = {
         try {
           md = require('markdown-js');
         } catch (err) {
-          throw new Error('Cannot find markdown library, install markdown or discount');
+          try {
+            md = require('showdown.js');
+          } catch (err){
+            throw new Error('Cannot find markdown library, install markdown or discount');
+          }
         }
       }
     }
