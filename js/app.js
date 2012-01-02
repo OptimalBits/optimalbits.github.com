@@ -4,58 +4,70 @@ $(function(){
 
 ginger.route.root = '/'
 
-ginger.route.listen(function(context){
-  context.get($('body'), function(){
+ginger.route.listen(function(req){
+  req.get(function(req){
   
-    this.render('/jade/main.jade', function(){
-      
-      // News
-      this.get('news', $('#content'), function(){
-      
-        if(this.isLast()){
-          curl(['text!/data/news.json'], function(d){
-            var data = JSON.parse(d);
-            context.load(data.urls, function(news) {
-              context.render('/jade/news.jade', '/css/news.css', {news:news});
-            })  
-          });
-        }else{
-          this.get(':id', $('content'), function() {
-            
-          
-          });
-        }
-      });
-      
-      // About
-      this.get('about', $('#content'), function(){
-        this.render('/jade/about.jade');
-      });
-      
-      // Products
-      this.get('products', function(context){
-        this.get('castmill', function(context){
+    if(req.isLast()){
+      ginger.route.redirect('/news');
+    }
+    
+    req.render('/jade/main.jade', '/css/main.css');
+    
+    req.get('news', '#content', function(req){
+      if(req.isLast()){
+        curl(['text!/data/news.json'], function(d){
+          var data = JSON.parse(d);
+          req.enter(function(req, done){
+            req.$el.fadeOut('slow', done);
+          })
+          req.load(data.urls);
+          req.render('/jade/news.jade', '/css/news.css', 'news', function(req, done){
+            req.$el.fadeIn('slow', done);
+          });  
         });
+      }else{
+        req.get(':id', '#content', function() {
+          req.enter(function(req, done){
+            req.$el.fadeOut('slow', done);
+          })
+          req.load('/data/news/'+req.params.id+'.json')
+          req.render('/jade/news-detail.jade', '/css/news.css', 'doc', function(req, done){
+            req.$el.fadeIn('slow', done);
+          });
+        });
+      }
+    });
+
+    // About
+    req.get('about', '#content', function(){
+      req
+      .enter(function(req, done){
+        req.$el.fadeOut('slow', done);
+      })
+      .render('/jade/about.jade', function(req, done){
+        req.$el.fadeIn('slow', done)
+      });
+    });
+      
+    // Products
+    req.get('products', '#content', function(){
+      req.get('castmill', function(){
+      });
          
-        this.get('ginger', function(context){
-        });
+      req.get('ginger', function(){
       });
+    });
       
-      // Career
-      this.get('career', function(context){
-      });
+    // Career
+    req.get('career', '#content', function(){
+    });
       
-      // Contact
-      this.get('contact', function(context){
-      });
-    })
-  });
+    // Contact
+    req.get('contact', '#content', function(){
+    });
+    
+  })
+});
 });
   
 });
-
-});
-
-
-
-
