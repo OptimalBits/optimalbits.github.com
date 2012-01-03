@@ -1,0 +1,3 @@
+[submodule "js/ginger"]
+	path = js/ginger
+	url = git@github.com:OptimalBits/ginger.git
