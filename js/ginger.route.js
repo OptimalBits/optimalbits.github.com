@@ -1,15 +1,23 @@
-define(['showdown', 
-        'js!jade.js'],function(showdown){
+define(['js!jade.js'],function(){
 
 var counter = 0;
 
 var jade = require('jade');
-
+/*
 require.register('showdown.js', function(module, exports, require){
   module.exports = showdown;  
 });
+*/
 
 var ginger = {};
+
+ginger.pluck = function(objs, key){
+  var result = [];
+  for (var i=0, len=objs.length;i<len;i++){
+    result.push(objs[i][key]);
+  }
+  return result;
+}
 
 function isString(s){
   return typeof s === 'string';
@@ -96,6 +104,8 @@ var Request = function(url, prevUrl){
     components.splice(last, 1);
   }
   
+  this.url = url;
+  this.prevUrl = prevUrl;
   this.query = parseQuery(s[1]);
   this.params = {};
   this.components = components;
@@ -136,7 +146,7 @@ Request.prototype.enter = function(cb){
   (function(done){
     self.promise.then(function(){
       if(self.needRender()){
-        cb.call(self, self, done);
+        cb.call(self, done);
       }else{
         promise.accept();
       }
@@ -180,7 +190,7 @@ Request.prototype.render = function(templateUrl, css, locals, cb){
           var fn = jade.compile(t,{locals:args});
           self.$el.html(fn(args));
           if(cb){
-            cb.call(self, self, done);
+            cb.call(self, done);
           }else{
             done();
           }
@@ -189,7 +199,7 @@ Request.prototype.render = function(templateUrl, css, locals, cb){
     })(promise.accept.bind(promise));
     self.promise = promise;
   }else{
-    cb && cb.call(self, self, function(){}); 
+    cb && cb.call(self, function(){}); 
   }
   return self;
 }
@@ -214,17 +224,12 @@ Request.prototype.load = function(urls, cb){
         var args = arguments;
         var objs = [];
         for(var i=0, len=args.length;i<len;i++){
-          var obj = JSON.parse(arguments[i]),
-              url = urls[i].split('/');
-      
-          obj.url = base+'/'+url[url.length-1].split('.')[0]
-    
-          objs.push(obj)
+          objs.push(JSON.parse(arguments[i]))
         }
         objs = objs.length===1?objs[0]:objs;
         self.data = objs;
         if(cb){
-          cb.call(self, self, done);
+          cb.call(self, done);
         }else{
           done();  
         }
@@ -237,19 +242,33 @@ Request.prototype.load = function(urls, cb){
   return self;
 }
 
+Request.prototype.resourceRoute = function(resource){
+  var base = this._currentSubPath();
+  components = resource.split('/');
+  return base+'/'+components[components.length-1].split('.')[0]
+}
+
 Request.prototype.isLast = function(){
   return this.index >= this.components.length
 }
 
 Request.prototype.needRender = function(){
-  if(route.prevUrl){
+  if(this.prevUrl){
     var subPath = this._currentSubPath()
     
-    if(subPath === route.prevUrl.substring(0, subPath.length)){
-      return false;
+    if(subPath === this.prevUrl.substring(0, subPath.length)){
+      if(this.index<this.components.length){
+        return false;
+      }
     }
   }
   return true;
+}
+
+Request.prototype.redirect = function(url){
+  this.promise.then(function(){ 
+    route.redirect(url);
+  });
 }
 
 Request.prototype._currentSubPath = function(){
@@ -265,9 +284,11 @@ Request.prototype._currentSubPath = function(){
 
 route.listen = function (cb) {
   var fn = function(){
-    route.prevUrl = route._prevUrl;
-    cb && cb(new Request(location.hash, route.prevUrl));
-    route._prevUrl = location.hash;
+    if(route.prevUrl !== location.hash){
+      var prevUrl = location.hash;
+      cb && cb(new Request(location.hash, route.prevUrl));
+      route.prevUrl = prevUrl;
+    }
   }
 
   if (location.hash === '') {
@@ -286,7 +307,11 @@ route.listen = function (cb) {
 }
 
 route.redirect = function(url) {
+  route.prevUrl = location.hash;
   location.hash = url;
+  if ('onhashchange' in window) {
+    $(window).trigger('onhashchange');
+  }
 }
 
 route.prevUrl = null;
