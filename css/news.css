@@ -1,5 +1,6 @@
 .news-body{
   padding-bottom: 32px;
+  font-size: 11pt;
 }
 
 .news-header a{
@@ -20,6 +21,3 @@
   margin-top: -10px;
 }
 
-.news-body {
-  font-size: 11pt;
-}
