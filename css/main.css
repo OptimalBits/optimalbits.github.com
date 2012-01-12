@@ -125,6 +125,8 @@ li{
 
 #followus li {
   padding-top: 5px;
+  left: 12px;
+  position: relative;
 }
 
 #copyright {
