@@ -62,16 +62,18 @@ li{
   color: #000000;
 }
 
-#menu a{
+#menu li a{
   text-decoration: none;
-}
-
-#menu a:visited{
   color: #000000;
 }
 
-#menu a:active{
-  color: #e01111;
+#menu li a:visited{
+  color: #000000;
+  font-weight: bold;
+}
+
+#menu li a:active{
+  color: #acacac;
 }
 
 #menu li{
