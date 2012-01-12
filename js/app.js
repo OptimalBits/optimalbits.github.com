@@ -12,16 +12,16 @@ ginger.route.root = '/'
 
 ginger.route.listen(function(req){
   req.get(function(){
-  
-    req
-      .enter('fadeIn')
-      .render('/jade/main.jade', '/css/main.css')
-      .exit('fadeOut')
-        
+      
     if(req.isLast()){
       req.redirect('/news');
       return;
     }
+    
+    req
+      .enter('fadeIn')
+      .render('/jade/main.jade', '/css/main.css')
+      .exit('fadeOut')
   
     req.get('news', '#content', function(){
       var data, urls;
@@ -124,6 +124,7 @@ ginger.route.listen(function(req){
       req.exit('fadeOut').render('/jade/copyright.jade').enter('fadeIn');
     });
   })
+    
 });
 });
   
