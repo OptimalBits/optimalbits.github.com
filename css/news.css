@@ -1,14 +1,36 @@
+
+@font-face {
+  font-family: "Standard";
+  src: local("Helvetica Neue UltraLight"),
+  local("HelveticaNeue-UltraLight"),
+  url(MgOpenModernaBold.ttf);
+  font-weight: bold;
+}
+
+.news-item {
+  border: 1px solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 16px;
+  padding: 12px;
+  -moz-box-shadow: 0 0 1px #000000;
+  -webkit-box-shadow: 0 0 1px #000000;
+  box-shadow: 0 0 1px #000000;
+}
+
 .news-body{
   padding-bottom: 32px;
   font-size: 11pt;
+  padding-top: 12px;
+}
+
+.news-header {
+ border-bottom: 1px solid #a8a8a8;
 }
 
 .news-header a{
-  font-weight: bold;
-  font-style: italic;
-  font-size: 13pt;
   text-decoration: none;
   color: #000000;
+  font: italic 16pt "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
 .news-header a:visited{
@@ -18,6 +40,6 @@
 .news-header p{
   font-size: 8pt;
   color: #878787; 
-  margin-top: -10px;
+  margin-top: -6px;
 }
 

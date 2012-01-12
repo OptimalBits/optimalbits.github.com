@@ -26,11 +26,11 @@ li{
   background-color: rgba(255, 255, 255, 0.6);
   -moz-box-shadow: 0 3px 5px #959595;
   -webkit-box-shadow: 0 3px 5px #959595;
-  box-shadow: 0 3px 5px #959595;
+  box-shadow: 0 3px 8px #959595;
 }
 
 #main{
-  background: url(/images/white_plaster.png) repeat left top; 
+  background: url(/images/bright_squares.jpg) repeat left top; 
   width: 960px;
   height: auto;
     
@@ -110,11 +110,19 @@ li{
   color: #ffffff;
 }
 
+.footer-column li a:visited{
+  color: #ffffff;
+}
+
 #followus {
   float: right;
   padding-top: 20px;
   padding-right: 24px;
   color: #16a8dc;
+}
+
+#followus li {
+  padding-top: 5px;
 }
 
 #copyright {
