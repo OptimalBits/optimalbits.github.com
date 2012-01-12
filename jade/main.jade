@@ -6,12 +6,13 @@
     #menu
       li 
         a(href="#/news") News
-      li 
-        a(href="#/products") Products
       li
-        a(href="#/products") Services
+        a(href="#/products") Products
+        #products
       li
         a(href="#/about") About Us
+      li
+        a(href="#/partners") Partners
       li
         a(href="#/career") Career
       li
@@ -23,28 +24,35 @@
     #footer-main
       #company.footer-column
         p Company
-        li About
-        li Vision
+        li 
+          a(href="#/about") About
+        li
+          a(href="#/vision") Vision
         li Press
         li 
           a(href="https://blog.optimalbits.com") Blog
       
       #legal.footer-column
         p Legal
-        li Copyright
-        li etc
+        li 
+          a(href="#/copyright") Copyright
+        li 
+          a(href="#/policy") Policy
       
       #credits.footer-column
         p Credits
-        li GingerJS
+        li 
+          a(href="#/products/ginger") GingerJS
         li jade
         li curl
         li showdown
       
       #followus Follow Us: 
         li 
-          a(href="http://twitter.com/optimalbits") @optimalbits
+          a(href="http://twitter.com/optimalbits")
+            img(src="/images/twitter.png", alt="")
         li 
-          a(href="http://github.com/OptimalBits") GitHub
+          a(href="http://github.com/OptimalBits") 
+            img(src="/images/github.png", alt="")
       
     #copyright Copyright 2011-2012 - Optimal Bits Sweden AB.

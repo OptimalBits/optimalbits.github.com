@@ -2,11 +2,11 @@
   {
   "url":"/data/news/innovation-grant.json",
   "title":"Innovationsbron grants us a 250kSEK convertible loan",
-  "date":"15/01/2012"  
+  "date":[2011, 11, 15]
   },
   {
   "url":"/data/news/accessed-incubator.json",
   "title":"Optimal Bits accepted to the incubator program",
-  "date":"15/01/2012"
+  "date":[2011, 11, 15]
   }
 ]
