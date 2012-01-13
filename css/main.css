@@ -1,5 +1,5 @@
-body{   
-  font: normal 12px/18px "Lucida Grande", Lucida, Verdana, sans-serif; 
+body{
+  font: normal 12pt "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin:0;
   padding:0;
   background-color: #000000;
@@ -10,15 +10,24 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
   padding:0;
 }
 
-a{
-  text-decoration: none;
-  color: #ffffff;
+h2{
+  margin-bottom: 16px;
+  margin-top: 20px;
+}
+
+p{
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 li{
   font-size: 8pt;
   display: block;
-  color: #ffffff;  
+  color: #000000;  
+}
+
+a, a:visited{
+  text-decoration: none;
 }
 
 #header{
@@ -49,6 +58,24 @@ li{
   text-align: justify;
 }
 
+#content a, a:visited{
+  text-decoration: none;
+  color: #000000;
+  font-style: italic;
+}
+
+#content a:hover{
+  color: #99905f;
+}
+
+#content p{
+  color: #676767;
+}
+
+#content li{
+  font-size: 12pt;
+}
+
 #logo{
   float: left;
   padding-top: 32px;
@@ -63,8 +90,7 @@ li{
 }
 
 #menu li a{
-  text-decoration: none;
-  color: #000000;
+  font-size: 12px;
 }
 
 #menu li a:visited{
@@ -72,7 +98,7 @@ li{
   font-weight: bold;
 }
 
-#menu li a:active{
+#menu li a:hover,a:active{
   color: #acacac;
 }
 
@@ -91,8 +117,22 @@ li{
   border: 1px dashed #afafaf;
 }
 
+#footer p{
+  font-size: 12px;
+}
+
 #footer-main{
   height: 130px;
+}
+
+#footer-main a,a:visited{
+  color: #ffffff;
+  font-size: 10px;
+}
+
+#footer-main a:hover{
+  color: #d19191;
+  font-size: 10px;
 }
 
 .footer-column{
@@ -103,16 +143,11 @@ li{
   color: #f6cb00;
 }
 
-.footer-column li{
+#footer-main li{
   font-variant: normal;
   padding-top: 8px;
-  font-size: 8pt;
   text-shadow: 1px 1px 1px #7b7b7b;
   display: block;
-  color: #ffffff;
-}
-
-.footer-column li a:visited{
   color: #ffffff;
 }
 

@@ -1,9 +1,9 @@
-.news
+#news
   .news-list
     each n in news
       .news-item
         .news-header
-          a(href="#{n.url}") #{n.title}
+          a(href="#{n.url}",style="font-size:22px") #{n.title}
           p #{n.date}
         .news-body
           !{n.content}

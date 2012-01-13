@@ -18,8 +18,6 @@
 #products li {
   display: block;
   padding-bottom: 5px;
-  font-weight: bold;
-  font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
   color: #f2cf6d;
 }
 
