@@ -89,11 +89,9 @@ ginger.route.listen(function(req){
     req.get('products', '#products', function(){
     
       // render submenu.
-      if(req.isLast()){
-        req.enter('fadeIn');
-        req.render('/jade/products.jade', '/css/products.css');
-        req.exit('fadeOut');
-      }
+      req.enter('fadeIn', 'fast');
+      req.render('/jade/products.jade', '/css/products.css');
+      req.exit('fadeOut');
           
       req.get('castmill','#content', function(){
         req.exit('fadeOut').render('/jade/products/castmill.jade').enter('fadeIn');
