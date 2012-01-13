@@ -5,6 +5,9 @@ define(['jquery',
         'js!jade.js',
         'js!moment.min.js'], function($, _, ginger, showdown){
 
+// TODO:
+// - Add breadcrumb.
+
 $(function(){
 var jade = require('jade');
 
@@ -38,6 +41,7 @@ ginger.route.listen(function(req){
         req.exit('fadeOut');
         
         req.load(function (done){
+          req.data = _.isArray(req.data)?req.data:[req.data];
           for(var i=0, len=req.data.length;i<len;i++){
             data[i].content = showdown.parse(req.data[i]);
             data[i].date = moment(data[i].date).fromNow();
@@ -109,7 +113,16 @@ ginger.route.listen(function(req){
       
     // Career
     req.get('career', '#content', function(){
-      req.exit('fadeOut').render('/jade/career.jade').enter('fadeIn');
+    
+      if(req.isLast()){
+        req.exit('fadeOut').render('/jade/career.jade').enter('fadeIn');
+      }else{
+        req.get(':id', '#content', function() {
+          req.render('/jade/career/'+req.params.id+'.jade');
+          req.enter('fadeIn');
+          req.exit('fadeOut');
+        });
+      }
     });
       
     // Contact
