@@ -2,14 +2,12 @@ define(['jquery',
         'underscore',
         'ginger/ginger',
         'showdown',
-        'js!jade.js',
         'js!moment.min.js'], function($, _, ginger, showdown){
 
 // TODO:
 // - Add breadcrumb.
 
 $(function(){
-var jade = require('jade');
 
 ginger.route.root = '/'
 
@@ -30,7 +28,7 @@ ginger.route.listen(function(req){
       var data, urls;
       
       if(req.isLast()){
-        req.custom(function(done){
+        req.before(function(done){
           curl(['text!/data/news.json'], function(d){
             data = JSON.parse(d);
             req.data = _.pluck(data, 'url');
@@ -55,7 +53,7 @@ ginger.route.listen(function(req){
         req.enter('fadeIn');
       }else{        
         req.get(':id', '#content', function() {
-          req.custom(function(done){
+          req.before(function(done){
             curl(['text!/data/news.json'], function(d){
               data = JSON.parse(d);
               req.data = _.pluck(data, 'url');
