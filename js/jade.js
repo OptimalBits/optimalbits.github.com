@@ -1,3 +1,4 @@
+(function() {
 
 // CommonJS require()
 
@@ -173,10 +174,10 @@ Compiler.prototype = {
     var debug = this.debug;
 
     if (debug) {
-      this.buf.push('__.unshift({ lineno: ' + node.line
+      this.buf.push('__jade.unshift({ lineno: ' + node.line
         + ', filename: ' + (node.filename
           ? '"' + node.filename + '"'
-          : '__[0].filename')
+          : '__jade[0].filename')
         + ' });');
     }
 
@@ -189,7 +190,7 @@ Compiler.prototype = {
 
     this.visitNode(node);
 
-    if (debug) this.buf.push('__.shift();');
+    if (debug) this.buf.push('__jade.shift();');
   },
   
   /**
@@ -640,11 +641,7 @@ module.exports = {
         try {
           md = require('markdown-js');
         } catch (err) {
-          try {
-            md = require('showdown.js');
-          } catch (err){
-            throw new Error('Cannot find markdown library, install markdown or discount');
-          }
+          throw new Error('Cannot find markdown library, install markdown or discount');
         }
       }
     }
@@ -840,11 +837,11 @@ exports.compile = function(str, options){
 
   if (options.compileDebug !== false) {
     fn = [
-        'var __ = [{ lineno: 1, filename: ' + filename + ' }];'
+        'var __jade = [{ lineno: 1, filename: ' + filename + ' }];'
       , 'try {'
       , parse(String(str), options || {})
       , '} catch (err) {'
-      , '  rethrow(err, __[0].filename, __[0].lineno);'
+      , '  rethrow(err, __jade[0].filename, __jade[0].lineno);'
       , '}'
     ].join('\n');
   } else {
@@ -933,6 +930,7 @@ exports.renderFile = function(path, options, fn){
  */
 
 exports.__express = exports.renderFile;
+
 }); // module: jade.js
 
 require.register("lexer.js", function(module, exports, require){
@@ -1235,6 +1233,14 @@ Lexer.prototype = {
   },
 
   /**
+   * Yield.
+   */
+  
+  yield: function() {
+    return this.scan(/^yield */, 'yield');
+  },
+
+  /**
    * Include.
    */
   
@@ -1286,7 +1292,7 @@ Lexer.prototype = {
 
   mixin: function(){
     var captures;
-    if (captures = /^mixin +([-\w]+)(?:\((.*)\))?/.exec(this.input)) {
+    if (captures = /^mixin +([-\w]+)(?: *\((.*)\))?/.exec(this.input)) {
       this.consume(captures[0].length);
       var tok = this.tok('mixin', captures[1]);
       tok.args = captures[2];
@@ -1608,6 +1614,7 @@ Lexer.prototype = {
     return this.deferred()
       || this.eos()
       || this.pipelessText()
+      || this.yield()
       || this.doctype()
       || this.case()
       || this.when()
@@ -1757,21 +1764,24 @@ Block.prototype.unshift = function(node){
 };
 
 /**
- * Return the "last" block.
+ * Return the "last" block, or the first `yield` node.
  *
  * @return {Block}
  * @api private
  */
 
-Block.prototype.lastBlock = function(){
-  var last = this
+Block.prototype.includeBlock = function(){
+  var ret = this
     , node;
+
   for (var i = 0, len = this.nodes.length; i < len; ++i) {
     node = this.nodes[i];
-    if (node.nodes) last = node.lastBlock();
-    else if (node.block && !node.block.isEmpty()) last = node.block.lastBlock();
+    if (node.yield) return node;
+    else if (node.includeBlock) ret = node.includeBlock();
+    else if (node.block && !node.block.isEmpty()) ret = node.block.includeBlock();
   }
-  return last;
+
+  return ret;
 };
 
 
@@ -2452,6 +2462,7 @@ Parser.prototype = {
    * | text
    * | each
    * | code
+   * | yield
    * | id
    * | class
    */
@@ -2486,6 +2497,11 @@ Parser.prototype = {
         return this.parseEach();
       case 'code':
         return this.parseCode();
+      case 'yield':
+        this.advance();
+        var block = new nodes.Block;
+        block.yield = true;
+        return block;
       case 'id':
       case 'class':
         var tok = this.advance();
@@ -2661,7 +2677,7 @@ Parser.prototype = {
     if (!this.filename)
       throw new Error('the "filename" option is required to extend templates');
 
-    var path = name = this.expect('extends').val.trim()
+    var path = this.expect('extends').val.trim()
       , dir = dirname(this.filename);
 
     var path = join(dir, path + '.jade')
@@ -2719,7 +2735,7 @@ Parser.prototype = {
       , basename = path.basename
       , join = path.join;
 
-    var path = name = this.expect('include').val.trim()
+    var path = this.expect('include').val.trim()
       , dir = dirname(this.filename);
 
     if (!this.filename)
@@ -2747,7 +2763,7 @@ Parser.prototype = {
     ast.filename = path;
 
     if ('indent' == this.peek().type) {
-      ast.lastBlock().push(this.block());
+      ast.includeBlock().push(this.block());
     }
 
     return ast;
@@ -3114,3 +3130,6 @@ exports.text = function(str){
   return interpolate(escape(str));
 };
 }); // module: utils.js
+
+window.jade = require("jade");
+})();
