@@ -14,7 +14,7 @@ h2{
   margin-bottom: 16px;
   margin-top: 20px;
 }
-
+rgb
 p{
   margin-top: 8px;
   margin-bottom: 8px;
@@ -146,7 +146,7 @@ a, a:visited{
 #footer-main li{
   font-variant: normal;
   padding-top: 8px;
-  text-shadow: 1px 1px 1px #7b7b7b;
+  text-shadow: 0px -1px #444, 0px -1px #000;
   display: block;
   color: #ffffff;
 }
