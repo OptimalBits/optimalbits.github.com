@@ -1,17 +1,25 @@
 define(['jquery', 
         'underscore',
-        'ginger/ginger',
+        'ginger/route',
         'showdown',
-        'js!moment.min.js'], function($, _, ginger, showdown){
+        'js!jade.js',
+        'js!moment.min.js'], function($, _, route, showdown){
 
 // TODO:
 // - Add breadcrumb.
 
 $(function(){
 
-ginger.route.root = '/'
+var template = function(templ, args){
+  var fn = jade.compile(templ, {locals:args});
+  return fn(args);
+}
 
-ginger.route.listen(function(req){
+route.root = '/'
+
+route.listen(function(req){
+  req.use('template', template);
+
   req.get(function(){
       
     if(req.isLast()){
