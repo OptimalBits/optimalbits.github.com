@@ -11,12 +11,18 @@
         baseUrl:'js',
         paths:{
           jquery:'jquery-1.7.1.min',
-          ginger:'ginger'
         },
+        packages:{
+          ginger: {
+            path: 'ginger',
+            main: 'ginger',
+            lib:  'ginger'
+          }
+        }
       };
     </script>
     
-    <script src="js/curl.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://raw.github.com/cujojs/curl/master/dist/curl-kitchen-sink/curl.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
     
     <script type="text/javascript">
