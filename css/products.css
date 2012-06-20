@@ -1,30 +1,28 @@
 #products {
-  background-color: #5a5a5a;
-  color: #f2cf6d;
-  opacity: 0.65;
-  -moz-box-shadow: 4px 3px 5px #000000;
-  -webkit-box-shadow: 4px 3px 5px #000000;
-  box-shadow: 4px 3px 5px #000000;
-  -webkit-border-radius: 5px;
-  -moz-box-border-radius:5px;
-  border-radius: 5px;
-  border: 3px solid #ffffff;
-  padding: 6px;
   position: absolute;
-  left: 34px;
-  margin-top: 5px;
+  left: 124px;
+  background: url(/images/dropdown-bg.png);
+  height: 82px;
+  padding-top: 20px;
+  width: 108px;
 }
 
 #products li {
   display: block;
   padding-bottom: 5px;
-  color: #f2cf6d;
+  padding-left:12px;
+  border:none;
+  margin: 0px;
 }
 
 #products li a{
-  color: #f2cf6d;
+  color: #BCBCBC;
+  font-size:12px;
 }
 
+#products li a:hover {
+  color:#4d4d4d;
+}
 #products li a:visited{
-  color: #f2cf6d;
+  color: #BCBCBC;
 }

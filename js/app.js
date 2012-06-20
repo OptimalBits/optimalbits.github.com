@@ -133,7 +133,7 @@ route.listen(function(req){
       
     // Contact
     req.get('contact', '#content', function(){
-      req.exit('fadeOut').render('/jade/contact.jade').enter('fadeIn');
+      req.exit('fadeOut').render('/jade/contact.jade','/css/contact.css').enter('fadeIn');
     });
     
     // Copyright

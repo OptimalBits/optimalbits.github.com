@@ -2,8 +2,10 @@
   .news-list
     each n in news
       .news-item
-        .news-header
-          a(href="#{n.url}",style="font-size:22px") #{n.title}
-          p #{n.date}
+        .news-header 
+          a(href="#{n.url}")
+            h2.lft #{n.title}
+          span.lft #{n.date}
+          .clr
         .news-body
           !{n.content}

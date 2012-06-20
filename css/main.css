@@ -2,22 +2,43 @@ body{
   font: normal 12pt "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin:0;
   padding:0;
-  background-color: #000000;
+  background: url(/images/bg-overlay.png) repeat left top; 
 }
 
 ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
   margin:0;
   padding:0;
 }
-
-h2{
-  margin-bottom: 16px;
-  margin-top: 20px;
+.lft {
+  float:left;
 }
-rgb
-p{
-  margin-top: 8px;
-  margin-bottom: 8px;
+.rft {
+  float:right;
+}
+h1 {
+  color:#4d4d4d;
+  font-weight:bold;
+  font-size:30px;
+}
+.title {
+  padding:15px 0px;
+}
+#container-wrapper {
+  background: #F9F9F9;
+  margin-bottom: 30px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.content-wrapper {
+  padding:0px 40px;
+}
+h2{
+  color:#4d4d4d;
+  font-size:19px;
+  font-weight:bold;
+}
+.clr {
+  clear:both;
 }
 
 li{
@@ -31,18 +52,14 @@ a, a:visited{
 }
 
 #header{
-  height: 128px;
-  background-color: rgba(255, 255, 255, 0.6);
-  -moz-box-shadow: 0 3px 5px #959595;
-  -webkit-box-shadow: 0 3px 5px #959595;
-  box-shadow: 0 3px 8px #959595;
+  height: 118px;
+  border-bottom: 1px solid #E5E5E5;
+  margin: 0px 40px;
 }
 
 #main{
-  background: url(/images/bright_squares.jpg) repeat left top; 
   width: 960px;
   height: auto;
-    
   margin: auto;
 }
 
@@ -52,24 +69,23 @@ a, a:visited{
 }
 
 #content{
-  margin: 24px;
-  line-height: 28px;
-  font-size: 12pt;
-  text-align: justify;
+  margin: 24px 0px;
 }
 
 #content a, a:visited{
   text-decoration: none;
   color: #000000;
-  font-style: italic;
 }
 
 #content a:hover{
   color: #99905f;
 }
 
-#content p{
+#content p {
   color: #676767;
+  font-size:13px;
+  text-align: justify;
+  line-height: 22px;
 }
 
 #content li{
@@ -79,22 +95,22 @@ a, a:visited{
 #logo{
   float: left;
   padding-top: 32px;
-  padding-left: 12px;
 }
 
-#menu{
-  float: right;
-  padding-right: 24px;
-  padding-top: 24px;
-  color: #000000;
+#menu {
+  float: left;
+  padding-top: 46px;
+  padding-left: 30px;
 }
 
 #menu li a{
-  font-size: 12px;
+  color: #bcbcbc;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 #menu li a:visited{
-  color: #000000;
+  color: #bcbcbc;
   font-weight: bold;
 }
 
@@ -102,37 +118,42 @@ a, a:visited{
   color: #acacac;
 }
 
-#menu li{
+#menu li {
   display: inline;
-  padding-right: 16px;
-  font: 10pt "Lucida Grande", Lucida, Verdana, sans-serif;
+  font: 14pt Helvetica, Lucida, Verdana, sans-serif;
+  padding-left: 20px;
+  margin-left: 20px;
+  border-left: 1px solid #dddddd;
+}
+#menu .first {
+  border-left: none;
 }
 
 #footer{
-  background: url(/images/denim.png) repeat left top;
-  color: #ffffff;
-  text-shadow: 0 0 1px #e4e4e4;
-  font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
-  height: 160px;
-  border: 1px dashed #afafaf;
 }
 
-#footer p{
-  font-size: 12px;
+#footer p {
+  font-size: 13px;
+  color:#fcfcfc;
+  text-shadow:0px 1px #34383e;
+  font-weight:bold;
 }
 
 #footer-main{
-  height: 130px;
+  height: 160px;
+  background: #3C4147;
+  border-radius: 5px;
+  box-shadow: 0px 1px 1px #51575F, inset 0px 1px 2px #2F3337;
+  margin-bottom: 30px;
+  border: 1px solid #1B1D21;
 }
 
 #footer-main a,a:visited{
-  color: #ffffff;
-  font-size: 10px;
+  color: #cfcfcf;
 }
 
 #footer-main a:hover{
   color: #d19191;
-  font-size: 10px;
 }
 
 .footer-column{
@@ -140,15 +161,14 @@ a, a:visited{
   padding-right: 24px;
   padding-top: 24px;
   float: left;
-  color: #f6cb00;
 }
 
 #footer-main li{
-  font-variant: normal;
   padding-top: 8px;
-  text-shadow: 0px -1px #444, 0px -1px #000;
   display: block;
-  color: #ffffff;
+  color: #cfcfcf;
+  text-shadow:0px 1px #34383e;
+  font-size:12px;
 }
 
 #followus {
@@ -165,8 +185,9 @@ a, a:visited{
 }
 
 #copyright {
-  text-align: right;
-  font-size: 8pt;
-  padding-right: 15px;
-  color: #d59388;
+  text-align: center;
+  font-size: 12px;
+  color: #CFCFCF;
+  text-shadow: 0px 1px #2A2D32;
+  margin-bottom: 15px;
 }
