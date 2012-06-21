@@ -1,17 +1,17 @@
 .contact-wrapper {
-  width:410px;
+  width: 390px;
 }
 .contact-details, .contact-address, .contact-phone, .contact-email {
   padding: 15px 0px 15px 50px;
 }
 .contact-address {
-  background: url(/images/address-icon.png) no-repeat 16px 20px;
+  background: url(/images/address-icon.png) no-repeat 16px 28px;
 }
 .contact-phone {
-  background: url(/images/phone-icon.png) no-repeat 16px 20px;
+  background: url(/images/phone-icon.png) no-repeat 16px 28px;
 }
 .contact-email {
-  background: url(/images/email-icon.png) no-repeat 16px 20px;
+  background: url(/images/email-icon.png) no-repeat 16px 30px;
 }
 .contact-ideon {
   margin-top:18px;

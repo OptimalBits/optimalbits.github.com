@@ -15,10 +15,21 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
 .rft {
   float:right;
 }
-h1 {
+h1,h2,h3 {
   color:#4d4d4d;
   font-weight:bold;
+}
+h1 {
   font-size:30px;
+}
+h2 {
+  font-size:20px;
+}
+h3 {
+  font-size:19px;
+}
+.main-title {
+  padding:30px 0px;
 }
 .title {
   padding:15px 0px;
@@ -30,12 +41,17 @@ h1 {
   border-bottom-left-radius: 10px;
 }
 .content-wrapper {
-  padding:0px 40px;
+  padding:0px 80px;
 }
-h2{
-  color:#4d4d4d;
-  font-size:19px;
-  font-weight:bold;
+.content-wrapper h2 {
+  padding: 15px 0px;
+}
+.content-wrapper p {
+  padding:10px 0px;
+}
+.content-entry {
+  border-bottom: 1px solid #E5E5E5;
+  padding-bottom: 50px;
 }
 .clr {
   clear:both;
@@ -146,6 +162,7 @@ a, a:visited{
   box-shadow: 0px 1px 1px #51575F, inset 0px 1px 2px #2F3337;
   margin-bottom: 30px;
   border: 1px solid #1B1D21;
+  background: rgba(0, 0, 0, 0.16);
 }
 
 #footer-main a,a:visited{
@@ -190,4 +207,16 @@ a, a:visited{
   color: #CFCFCF;
   text-shadow: 0px 1px #2A2D32;
   margin-bottom: 15px;
+}
+/* icons */
+.twitter-icon {
+  background: url(/images/icons.png);
+  width: 25px;
+  height: 20px;
+}
+.github-icon {
+  background: url(/images/icons.png);
+  height: 20px;
+  width: 22px;
+  background-position: -25px 0px;
 }
