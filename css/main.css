@@ -39,7 +39,7 @@ h3 {
   margin-bottom: 30px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  height: 623px;
+  height: 650px;
 }
 .content-wrapper {
   padding:0px 80px;
@@ -81,7 +81,7 @@ a, a:visited{
 }
 
 #content-pane{
-  height: 517px;
+  height: 530px;
   overflow: auto;
 }
 
