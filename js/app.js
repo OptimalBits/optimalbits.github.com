@@ -100,8 +100,12 @@ route.listen(function(req){
     
       // render submenu.
       req.enter('show', 'fast');
-      req.render('/jade/products.jade', '/css/products.css');
-      req.exit('hide');
+      req.render('/jade/products.jade', '/css/products.css',function(){
+        $('#products-menu').addClass('open');
+      });
+      req.exit('hide',function(){
+        $('#products-menu').removeClass('open');
+      });
           
       req.get('castmill','#content', function(){
         req.exit('fadeOut').render('/jade/products/castmill.jade').enter('fadeIn');

@@ -80,7 +80,7 @@ a, a:visited{
   margin: auto;
 }
 
-#content-pane{
+#content-panel{
   height: 530px;
   overflow: auto;
 }
@@ -88,10 +88,17 @@ a, a:visited{
 #content{
   margin: 24px 0px;
 }
-
+#content li {
+  color: #676767;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 2px 4px;
+}
 #content a, a:visited{
   text-decoration: none;
-  color: #000000;
+  color: #676767;
+  font-weight: bold;
+  font-size: 13px;
 }
 
 #content a:hover{
@@ -105,10 +112,6 @@ a, a:visited{
   line-height: 22px;
 }
 
-#content li{
-  font-size: 12pt;
-}
-
 #logo{
   float: left;
   padding-top: 32px;
@@ -119,7 +122,9 @@ a, a:visited{
   padding-top: 46px;
   padding-left: 30px;
 }
-
+#menu .open {
+  background: url(/images/menu-open.png) no-repeat right;
+}
 #menu li a{
   color: #bcbcbc;
   font-size: 14px;
@@ -146,9 +151,11 @@ a, a:visited{
   border-left: none;
 }
 
-#footer{
+#products-menu {
+  background: url(/images/menu-close.png) no-repeat right;
+  padding-right: 20px;
+  margin-right: -8px;
 }
-
 #footer p {
   font-size: 13px;
   color:#fcfcfc;

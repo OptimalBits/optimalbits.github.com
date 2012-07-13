@@ -1,17 +1,24 @@
 .contact-wrapper {
-  width: 390px;
+  width: 410px;
+  padding: 0px 56px;
+}
+.contact-wrapper p {
+  padding:0px;
 }
 .contact-details, .contact-address, .contact-phone, .contact-email {
   padding: 15px 0px 15px 50px;
 }
 .contact-address {
-  background: url(/images/address-icon.png) no-repeat 16px 28px;
+  background: url(/images/address-icon.png) no-repeat 25px 19px;
+}
+.contact-address p {
+  padding:0px;
 }
 .contact-phone {
-  background: url(/images/phone-icon.png) no-repeat 16px 28px;
+  background: url(/images/phone-icon.png) no-repeat 16px 18px;
 }
 .contact-email {
-  background: url(/images/email-icon.png) no-repeat 16px 30px;
+  background: url(/images/email-icon.png) no-repeat 16px 20px;
 }
 .contact-ideon {
   margin-top:18px;
@@ -34,5 +41,5 @@
   height: 35px;
   width: 210px;
   float: right;
-  margin-top: 40px;
+  margin-top: 32px;
 }

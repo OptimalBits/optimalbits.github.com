@@ -1,8 +1,8 @@
 #news
   .news-item
     .news-header
-      h3
-        a(href="#{doc.url}") #{doc.title}
+      a(href="#{doc.url}")
+        h3 #{doc.title}
       p #{doc.date}
     .news-body
       !{doc.content}
