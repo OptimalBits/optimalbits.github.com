@@ -90,6 +90,7 @@ a, a:visited{
 }
 #content li {
   color: #676767;
+  font-style: italic;
   font-weight: bold;
   font-size: 13px;
   padding: 2px 4px;
