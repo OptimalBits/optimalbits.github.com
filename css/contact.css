@@ -1,12 +1,12 @@
 .contact-wrapper {
-  width: 410px;
-  padding: 0px 56px;
+  width: 400px;
+  padding: 0px 66px 0px 56px;
 }
 .contact-wrapper p {
   padding:0px;
 }
 .contact-details, .contact-address, .contact-phone, .contact-email {
-  padding: 15px 0px 15px 50px;
+  padding: 15px 0px 6px 50px;
 }
 .contact-address {
   background: url(/images/address-icon.png) no-repeat 25px 19px;
