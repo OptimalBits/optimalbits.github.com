@@ -17,14 +17,13 @@ var template = function(templ, args){
 
 route.root = '/'
 
-route.listen(function(req){
+route(function(req){
   req.use('template', template);
 
   req.get(function(){
       
     if(req.isLast()){
       req.redirect('/news');
-      return;
     }
     
     req
