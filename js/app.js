@@ -21,7 +21,7 @@ Gnd.Route.listen(function(req){
   req.get(function(){
       
     if(req.isLast()){
-      req.redirect('/news');
+      req.redirect('#!/news');
     }
     
     req
