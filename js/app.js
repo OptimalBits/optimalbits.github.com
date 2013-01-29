@@ -3,15 +3,12 @@ define(['gnd',
         'js!jade.js',
         'js!moment.min.js'], function(Gnd, showdown){
 
-// TODO:
-// - Add breadcrumb.
-
 $(function(){
 
-var template = function(templ, args){
-  var fn = jade.compile(templ, {locals:args});
-  return fn(args);
-}
+  Gnd.use('template', function(templ){
+    return jade.compile(templ); //, {locals:args});
+  });
+
 // Effects
 var fadeOut = function(el, done){
   $(el).fadeOut(done)
@@ -21,8 +18,6 @@ var fadeIn = function(el, done){
 }
 
 Gnd.Route.listen(function(req){
-  req.use('template', template);
-
   req.get(function(){
       
     if(req.isLast()){
@@ -31,7 +26,7 @@ Gnd.Route.listen(function(req){
     
     req
       //.enter(fadeIn)
-      .render('/jade/main.jade', '/css/main.css',Gnd.Util.noop)
+      .render('/jade/main.jade', '/css/main.css')
       .exit(fadeOut)
   
     req.get('news', '#content', function(){
@@ -64,7 +59,7 @@ Gnd.Route.listen(function(req){
           done();
         });
         
-        req.render('/jade/news.jade', '/css/news.css', Gnd.Util.noop);
+        req.render('/jade/news.jade', '/css/news.css');
         req.enter(fadeIn);
       }else{        
         req.get(':id', '#content', function() {
@@ -103,26 +98,47 @@ Gnd.Route.listen(function(req){
     });
       
     // Products
-    req.get('products', '#products', function(){
-    
+    req.get('products', '#content', function(pool){
+      
+      var productsMenu = new Gnd.View('#products', {
+        templateUrl: '/jade/products-menu.jade',
+        cssUrl: '/css/products.css'
+      });
+      
+      pool.autorelease(productsMenu);
+      
       // render submenu.
-      req.enter(function(el,done){
+      req.enter(function(el, done){
         $('#products-menu')[0].className = 'open';
-        $(el).fadeIn('fast');
+        fadeIn(el, done);
       });
-      req.render('/jade/products.jade', '/css/products.css',Gnd.Util.noop);
-      req.exit(function(el,done){
+      
+      if(req.isLast()){
+        req.render('/jade/products.jade');
+      }
+      
+      req.after(function(done){
+        productsMenu.init(function(){
+          productsMenu.render();
+          $('#products-menu').fadeIn('fast', done);
+        });
+      });
+      
+      req.exit(function(el, done){
         $('#products-menu')[0].className = '';
-        $(el).fadeOut('fast');
-        done();
+        fadeOut(el, done);
       });
-          
+      
       req.get('castmill','#content', function(){
         req.exit(fadeOut).render('/jade/products/castmill.jade').enter(fadeIn);
       });
          
-      req.get('ginger', '#content', function(){
+      req.get('ground', '#content', function(){
         req.exit(fadeOut).render('/jade/products/ginger.jade').enter(fadeIn);
+      });
+      
+      req.get('nodejs', '#content', function(){
+        req.exit(fadeOut).render('/jade/products/nodejs.jade').enter(fadeIn);
       });
     });
     
@@ -154,6 +170,12 @@ Gnd.Route.listen(function(req){
     req.get('copyright', '#content', function(){
       req.exit(fadeOut).render('/jade/copyright.jade').enter(fadeIn);
     });
+    
+    // Vision
+    req.get('vision', '#content', function(){
+      req.exit(fadeOut).render('/jade/vision.jade').enter(fadeIn);
+    });
+    
   })
     
 });

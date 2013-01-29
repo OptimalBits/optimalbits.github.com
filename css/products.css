@@ -3,7 +3,7 @@
   left: 128px;
   padding: 0px;
 }
-#products .profucts-top-bg {
+#products .products-top-bg {
   background: url(/images/dropdown-bg.png) no-repeat;
   height: 8px;
   width: 105px;
@@ -32,4 +32,31 @@
 }
 #products li a:visited{
   color: #BCBCBC;
+}
+
+.castmill-portal-image {
+  width: 320px;
+  height: 213px;
+  margin: 6px;
+  background: url(/images/castmill-portal.jpg);
+  box-shadow: inset 0px 0px 1px black;
+  border-radius: 4px;
+}
+
+.ground-logo {
+  width: 252px;
+  height: 64px;
+  margin: 6px;
+  background: url(/images/ground-logo.jpg);
+  box-shadow: inset 0px 0px 1px black;
+  border-radius: 4px;
+}
+
+.nodejs-logo {
+  width: 212px;
+  height: 114px;
+  margin: 6px;
+  background: url(/images/nodejs-logo.jpg);
+  box-shadow: inset 0px 0px 1px black;
+  border-radius: 4px;
 }
