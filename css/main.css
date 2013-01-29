@@ -9,6 +9,9 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
   margin:0;
   padding:0;
 }
+img,a {
+  outline: :none;
+}
 .lft {
   float:left;
 }
