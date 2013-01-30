@@ -5,7 +5,7 @@ var Gnd;
         if(_.isString(selectorOrElement)) {
             var selector = selectorOrElement;
             switch(selector[0]) {
-                case '#':
+                case '#': {
                     var id = selector.slice(1);
                     el = context.getElementById(id);
                     if(el && el.parentNode) {
@@ -14,15 +14,23 @@ var Gnd;
                         }
                     }
                     break;
-                case '.':
+
+                }
+                case '.': {
                     var className = selector.slice(1);
-                    push.apply(query, context.getElementsByClassName(className));
+                    push.apply(query, Array.prototype.slice.call(context.getElementsByClassName(className)));
                     break;
-                case '<':
+
+                }
+                case '<': {
                     push(makeElement(selector));
                     break;
-                default:
-                    push.apply(query, context.getElementsByTagName(selector));
+
+                }
+                default: {
+                    push.apply(query, Array.prototype.slice.call(context.getElementsByTagName(selector)));
+
+                }
             }
         } else {
             push(selectorOrElement);
@@ -38,8 +46,10 @@ var Gnd;
                 _.each(_this, function (el) {
                     if(el.addEventListener) {
                         el.addEventListener(eventName, handler);
-                    } else if(el['attachEvent']) {
-                        el['attachEvent']("on" + eventName, handler);
+                    } else {
+                        if(el['attachEvent']) {
+                            el['attachEvent']("on" + eventName, handler);
+                        }
                     }
                 });
             });
@@ -51,8 +61,10 @@ var Gnd;
                 _.each(_this, function (el) {
                     if(el.removeEventListener) {
                         el.removeEventListener(eventName, handler);
-                    } else if(el['detachEvent']) {
-                        el['detachEvent']("on" + eventName, handler);
+                    } else {
+                        if(el['detachEvent']) {
+                            el['detachEvent']("on" + eventName, handler);
+                        }
                     }
                 });
             });
@@ -135,7 +147,7 @@ var Gnd;
     }
     Gnd.isElement = isElement;
     function makeElement(html) {
-        var child, container = document.createElement("p"), fragment = document.createDocumentFragment();
+        var child, container = document.createElement("div"), fragment = document.createDocumentFragment();
         container.innerHTML = html;
         while(child = container.firstChild) {
             fragment.appendChild(child);
@@ -160,13 +172,19 @@ var Gnd;
         } else {
             var val = el.getAttribute(attr);
             switch(val) {
-                case 'true':
+                case 'true': {
                     return true;
+
+                }
                 case null:
-                case 'false':
+                case 'false': {
                     return false;
-                default:
+
+                }
+                default: {
                     return val;
+
+                }
             }
         }
     }
@@ -233,7 +251,7 @@ var Gnd;
                                 });
                             } catch (e) {
                             }
-                            ;
+                            ; ;
                             cb(null, res);
                         } else {
                             cb(new Error("Ajax Error: " + xhr.responseText));
@@ -273,7 +291,7 @@ var Gnd;
             } else {
                 throw new Error("Not matched function signature: " + key);
             }
-        };
+        }
     }
     Gnd.overload = overload;
     function type(obj) {
@@ -303,13 +321,15 @@ var Gnd;
             _this[key] = value;
         });
     }
-    ;
+    ; ;
     Gnd.using = new Using();
     function use(param, value) {
         switch(param) {
-            case 'template':
+            case 'template': {
                 Gnd.using.template = value;
                 break;
+
+            }
         }
     }
     Gnd.use = use;
@@ -320,27 +340,27 @@ var Gnd;
         function noop() {
         }
         Util.noop = noop;
-        ;
+        ; ;
         function assert(cond, msg) {
             if(!cond) {
                 console.log('Assert failed:%s', msg);
             }
         }
         Util.assert = assert;
-        ;
+        ; ;
         function uuid(a, b) {
             for(b = a = ''; a++ < 36; b += a * 51 & 52 ? (a ^ 15 ? 8 ^ Math.random() * (a ^ 20 ? 16 : 4) : 4).toString(16) : '-') {
-                ;
+                ; ;
             }
             return b;
         }
         Util.uuid = uuid;
-        ;
+        ; ;
         function refresh() {
             window.location.replace('');
         }
         Util.refresh = refresh;
-        ;
+        ; ;
         function retain(objs) {
             var items = _.isArray(objs) ? objs : arguments;
             _.each(items, function (obj) {
@@ -348,7 +368,7 @@ var Gnd;
             });
         }
         Util.retain = retain;
-        ;
+        ; ;
         function release(objs) {
             var items = _.isArray(objs) ? objs : arguments;
             _.each(items, function (obj) {
@@ -356,24 +376,22 @@ var Gnd;
             });
         }
         Util.release = release;
-        ;
+        ; ;
         function nextTick(fn) {
             setTimeout(fn, 0);
         }
         Util.nextTick = nextTick;
-        ;
+        ; ;
         function trim() {
             return this.replace(/^\s+|\s+$/g, '');
         }
         Util.trim = trim;
-        ;
+        ; ;
         function asyncDebounce(fn) {
             var delayedFunc = null, executing = null;
             return function debounced() {
                 var context = this, args = arguments, nargs = args.length, cb = args[nargs - 1], delayed = function () {
-                    executing = fn;
-                    fn.apply(context, args);
-                };
+executing = fn;fn.apply(context, args);                };
                 args[nargs - 1] = function () {
                     cb.apply(context, arguments);
                     executing = null;
@@ -388,10 +406,10 @@ var Gnd;
                 } else {
                     delayed();
                 }
-            };
+            }
         }
         Util.asyncDebounce = asyncDebounce;
-        ;
+        ; ;
         function waitTrigger(func, start, end, delay) {
             return function waiter() {
                 var obj = this, waiting = false, timer = null, args = Array.prototype.slice.call(arguments), nargs = args.length, callback = args[nargs - 1];
@@ -407,10 +425,10 @@ var Gnd;
                     start();
                 }, delay);
                 func.apply(this, args);
-            };
+            }
         }
         Util.waitTrigger = waitTrigger;
-        ;
+        ; ;
         function searchFilter(obj, search, fields) {
             if(search) {
                 var result = false;
@@ -426,7 +444,7 @@ var Gnd;
             }
         }
         Util.searchFilter = searchFilter;
-        ;
+        ; ;
         function asyncForEach(array, fn, cb) {
             var completed = 0;
             function iter(item, len) {
@@ -455,7 +473,7 @@ var Gnd;
             }
         }
         Util.asyncForEach = asyncForEach;
-        ;
+        ; ;
         function asyncForEachSeries(arr, fn, cb) {
             cb = cb || noop;
             if(!arr.length) {
@@ -477,7 +495,7 @@ var Gnd;
                     }
                 });
             }
-            ;
+            ; ;
             iterate();
         }
         Util.asyncForEachSeries = asyncForEachSeries;
@@ -508,7 +526,7 @@ var Gnd;
             function errorFn() {
                 cb(new Error('Socket disconnected'));
             }
-            ;
+            ; ;
             function proxyCb(err, res) {
                 socket.removeListener('disconnect', errorFn);
                 if(err) {
@@ -516,7 +534,7 @@ var Gnd;
                 }
                 cb(err, res);
             }
-            ;
+            ; ;
             args[args.length - 1] = proxyCb;
             if(socket.socket.connected) {
                 socket.once('disconnect', errorFn);
@@ -600,8 +618,10 @@ var Gnd;
                     _this.isExecuting = false;
                     _this.executeTasks();
                 });
-            } else if(this.isEnded || this.isCancelled) {
-                this.endPromise.resolve(this.isCancelled);
+            } else {
+                if(this.isEnded || this.isCancelled) {
+                    this.endPromise.resolve(this.isCancelled);
+                }
             }
         };
         return TaskQueue;
@@ -811,23 +831,25 @@ var Gnd;
                 event = eventAndNamespace[0];
                 listeners && delete listeners[event];
                 namespaces && delete namespaces[event];
-            } else if(namespaces) {
-                var namespace = eventAndNamespace[0];
-                event = eventAndNamespace[1];
-                if(namespaces[namespace]) {
-                    var _listeners;
-                    if(event === '') {
-                        var events = namespaces[namespace];
-                        _.each(events, function (listeners, event) {
-                            for(var i = 0, len = listeners.length; i < len; i++) {
-                                self._removeListener(event, listeners[i]);
-                            }
-                        });
-                    } else {
-                        _listeners = _.union(_listeners, namespaces[namespace][event]);
-                        if(_listeners) {
-                            for(var i = 0, len = listeners.length; i < len; i++) {
-                                this._removeListener(event, _listeners[i]);
+            } else {
+                if(namespaces) {
+                    var namespace = eventAndNamespace[0];
+                    event = eventAndNamespace[1];
+                    if(namespaces[namespace]) {
+                        var _listeners;
+                        if(event === '') {
+                            var events = namespaces[namespace];
+                            _.each(events, function (listeners, event) {
+                                for(var i = 0, len = listeners.length; i < len; i++) {
+                                    self._removeListener(event, listeners[i]);
+                                }
+                            });
+                        } else {
+                            _listeners = _.union(_listeners, namespaces[namespace][event]);
+                            if(_listeners) {
+                                for(var i = 0, len = listeners.length; i < len; i++) {
+                                    this._removeListener(event, _listeners[i]);
+                                }
                             }
                         }
                     }
@@ -890,7 +912,7 @@ var Gnd;
             };
         };
         UndoManager.prototype.endGroup = function () {
-            ;
+            ; ;
             ((function (group) {
                 this.action(function () {
                     for(var i = 0, len = group.length; i < len; i++) {
@@ -1064,18 +1086,20 @@ var Gnd;
             this._refCounter--;
             if(this._refCounter === 0) {
                 this.destroy();
-            } else if(this._refCounter < 0) {
-                var msg;
-                if(this._destroyed) {
-                    msg = "Object has already been released";
-                    if(this._destroyedTrace) {
-                        msg += '\n' + this._destroyedTrace;
+            } else {
+                if(this._refCounter < 0) {
+                    var msg;
+                    if(this._destroyed) {
+                        msg = "Object has already been released";
+                        if(this._destroyedTrace) {
+                            msg += '\n' + this._destroyedTrace;
+                        }
+                        throw new Error(msg);
+                    } else {
+                        msg = "Invalid reference count!";
                     }
                     throw new Error(msg);
-                } else {
-                    msg = "Invalid reference count!";
                 }
-                throw new Error(msg);
             }
             return this;
         };
@@ -1144,8 +1168,10 @@ var Index = (function () {
         prevElem.next = elem.next;
         if(idx === this.first) {
             this.first = elem.next;
-        } else if(idx === this.last) {
-            this.last = elem.prev;
+        } else {
+            if(idx === this.last) {
+                this.last = elem.prev;
+            }
         }
         this.unusedKeys.push(idx);
         return elem.key;
@@ -1332,7 +1358,7 @@ var Gnd;
             }
             Queue.makeKey = function makeKey(keyPath) {
                 return keyPath.join(':');
-            };
+            }
             Queue.prototype.init = function (cb) {
                 var _this = this;
                 this.localStorage.all([
@@ -1375,8 +1401,7 @@ var Gnd;
             };
             Queue.prototype.updateLocalCollection = function (keyPath, query, options, newItems, cb) {
                 var storage = this.localStorage, itemKeyPath = [
-                    _.last(keyPath)
-                ];
+_.last(keyPath)                ];
                 options = _.extend({
                     snapshot: false
                 }, options);
@@ -1549,7 +1574,7 @@ var Gnd;
                     if(this.queue.length) {
                         var obj = this.currentTransfer = this.queue[0], localStorage = this.localStorage, remoteStorage = this.remoteStorage, keyPath = obj.keyPath, itemsKeyPath = obj.itemsKeyPath, itemIds = obj.itemIds, args = obj.args;
                         switch(obj.cmd) {
-                            case 'create':
+                            case 'create': {
                                 (function (cid, args) {
                                     remoteStorage.create(keyPath, args, function (err, sid) {
                                         var localKeyPath = keyPath.concat(cid);
@@ -1572,20 +1597,30 @@ var Gnd;
                                     });
                                 })(args['_cid'], args);
                                 break;
-                            case 'update':
+
+                            }
+                            case 'update': {
                                 remoteStorage.put(keyPath, args, done);
                                 break;
-                            case 'delete':
+
+                            }
+                            case 'delete': {
                                 remoteStorage.del(keyPath, done);
                                 break;
-                            case 'add':
+
+                            }
+                            case 'add': {
                                 remoteStorage.add(keyPath, itemsKeyPath, itemIds, {
                                 }, done);
                                 break;
-                            case 'remove':
+
+                            }
+                            case 'remove': {
                                 remoteStorage.remove(keyPath, itemsKeyPath, itemIds, {
                                 }, done);
                                 break;
+
+                            }
                         }
                     } else {
                         this.emit('synced:', this);
@@ -1634,22 +1669,28 @@ var Gnd;
                             insync: true
                         };
                         switch(cmd.cmd) {
-                            case 'add':
+                            case 'add': {
                                 storage.remove(cmd.keyPath, cmd.itemsKeyPath, cmd.oldItemIds || [], opts, function (err) {
                                     storage.add(cmd.keyPath, cmd.itemsKeyPath, cmd.itemIds, opts, function (err) {
                                         Gnd.Util.nextTick(syncFn);
                                     });
                                 });
                                 break;
-                            case 'remove':
+
+                            }
+                            case 'remove': {
                                 storage.remove(cmd.keyPath, cmd.itemsKeyPath, cmd.oldItemIds || [], opts, function (err) {
                                     storage.remove(cmd.keyPath, cmd.itemsKeyPath, cmd.itemIds, opts, function (err) {
                                         Gnd.Util.nextTick(syncFn);
                                     });
                                 });
                                 break;
-                            default:
+
+                            }
+                            default: {
                                 Gnd.Util.nextTick(syncFn);
+
+                            }
                         }
                     });
                 }
@@ -1932,7 +1973,7 @@ var Gnd;
 var Gnd;
 (function (Gnd) {
     (function (Sync) {
-        ;
+        ; ;
         var Manager = (function (_super) {
             __extends(Manager, _super);
             function Manager(socket) {
@@ -2084,12 +2125,15 @@ var Gnd;
                 }
             }
         }
+        Model.__bucket = "";
+        Model.syncManager = null;
+        Model.storageQueue = null;
         Model.extend = function extend(bucket) {
             var _this = this;
             function __(args, _bucket) {
                 _this.call(this, args, bucket || _bucket);
             }
-            ;
+            ; ;
             __.prototype = this.prototype;
             __.prototype._super = this;
             _.extend(__, {
@@ -2104,7 +2148,7 @@ var Gnd;
                 fromArgs: this.fromArgs
             });
             return __;
-        };
+        }
         Model.create = function create(args, keepSynced, cb) {
             Gnd.overload({
                 'Object Boolean Function': function (args, keepSynced, cb) {
@@ -2129,11 +2173,11 @@ var Gnd;
                     this.create(args, false, cb);
                 }
             }).apply(this, arguments);
-        };
+        }
         Model.findById = function findById(keyPathOrId, keepSynced, args, cb) {
+            var _this = this;
             return Gnd.overload({
                 'Array Boolean Object Function': function (keyPath, keepSynced, args, cb) {
-                    var _this = this;
                     Model.storageQueue.fetch(keyPath, function (err, doc) {
                         if(doc) {
                             _.extend(doc, args);
@@ -2162,7 +2206,7 @@ var Gnd;
                     return this.findById(id, false, args, cb);
                 }
             }).apply(this, arguments);
-        };
+        }
         Model.removeById = function removeById(keypathOrId, cb) {
             var keypath = _.isArray(keypathOrId) ? keypathOrId : [
                 this.__bucket, 
@@ -2171,13 +2215,13 @@ var Gnd;
             Model.storageQueue.del(keypath, function (err) {
                 cb(err);
             });
-        };
+        }
         Model.fromJSON = function fromJSON(args, cb) {
             cb(null, new this(args));
-        };
+        }
         Model.fromArgs = function fromArgs(args, cb) {
             this.fromJson(args, cb);
-        };
+        }
         Model.prototype.destroy = function () {
             Model.syncManager && Model.syncManager.endSync(this);
             _super.prototype.destroy.call(this);
@@ -2282,8 +2326,10 @@ var Gnd;
                 if(!_.isUndefined(this[key]) && !_.isNull(this[key]) && !_.isFunction(this[key]) && (key[0] !== '_')) {
                     if(_.isFunction(this[key].toArgs)) {
                         args[key] = this[key].toArgs();
-                    } else if(!_.isObject(this[key])) {
-                        args[key] = this[key];
+                    } else {
+                        if(!_.isObject(this[key])) {
+                            args[key] = this[key];
+                        }
                     }
                 }
             }
@@ -2302,7 +2348,7 @@ var Gnd;
             }, function (err) {
                 done(err, models);
             });
-        };
+        }
         Model.allModels = function allModels(cb) {
             var _this = this;
             Model.storageQueue.find([
@@ -2316,10 +2362,10 @@ var Gnd;
                     cb(err);
                 }
             });
-        };
+        }
         Model.all = function all(parent, args, bucket, cb) {
+            var _this = this;
             function allInstances(parent, keyPath, args, cb) {
-                var _this = this;
                 Model.storageQueue.find(keyPath, {
                 }, {
                 }, function (err, docs) {
@@ -2349,7 +2395,7 @@ var Gnd;
                     }, cb);
                 }
             }).apply(this, arguments);
-        };
+        }
         Model.prototype.all = function (model, args, bucket, cb) {
             model.all(this, args, bucket, cb);
         };
@@ -2413,6 +2459,7 @@ var Gnd;
             _super.prototype.destroy.call(this);
         };
         Collection.create = function create(model, parent, docs, cb) {
+            var _this = this;
             return Gnd.overload({
                 'Function Model Array': function (model, parent, models) {
                     var collection = new Collection(model, parent, models);
@@ -2424,7 +2471,6 @@ var Gnd;
                     return collection;
                 },
                 'Function Model Array Function': function (model, parent, items, cb) {
-                    var _this = this;
                     model.createModels(items, function (err, models) {
                         if(err) {
                             cb(err);
@@ -2440,12 +2486,12 @@ var Gnd;
                     this.create(model, parent, [], cb);
                 }
             }).apply(this, arguments);
-        };
+        }
         Collection.getItemIds = function getItemIds(items) {
             return _.map(items, function (item) {
                 return item.id();
             });
-        };
+        }
         Collection.prototype.findById = function (id) {
             return this['find'](function (item) {
                 return item.id() == id;
@@ -2457,8 +2503,10 @@ var Gnd;
             var itemsKeyPath = [];
             if(this._removed.length) {
                 itemsKeyPath = _.initial(this._removed[0].getKeyPath());
-            } else if(this._added.length) {
-                itemsKeyPath = _.initial(this._added[0].getKeyPath());
+            } else {
+                if(this._added.length) {
+                    itemsKeyPath = _.initial(this._added[0].getKeyPath());
+                }
             }
             var itemIds = Collection.getItemIds(this._removed);
             Gnd.Model.storageQueue.remove(keyPath, itemsKeyPath, itemIds, function (err) {
@@ -2768,7 +2816,7 @@ var Gnd;
 var Gnd;
 (function (Gnd) {
     (function (Route) {
-        ;
+        ; ;
         var interval;
         function listen(root, cb) {
             if(_.isFunction(root)) {
@@ -2776,7 +2824,7 @@ var Gnd;
                 root = '/';
             }
             var req, fn = function () {
-                var url = location.hash.replace(/^#!?/, '');
+url = location.hash.replace(/^#!?/, '');
                 if(!req || (req.url !== url)) {
                     req && req.queue.cancel();
                     req = new Request(url, req && req.nodes || []);
@@ -2891,7 +2939,7 @@ var Gnd;
                         }
                     });
                     fn.apply(null, _args);
-                };
+                }
             },
             'Function Function': function (fn, cb) {
                 return wrap(fn, [], cb);
@@ -3054,7 +3102,7 @@ var Gnd;
                             });
                         }
                     });
-                };
+                }
             };
             Request.prototype.get = function () {
                 return Gnd.overload({
@@ -3183,13 +3231,17 @@ var Gnd;
                     cb = locals;
                     locals = css;
                     css = undefined;
-                } else if(_.isFunction(css)) {
-                    cb = css;
-                    css = undefined;
-                    locals = undefined;
-                } else if(_.isFunction(locals)) {
-                    cb = locals;
-                    locals = undefined;
+                } else {
+                    if(_.isFunction(css)) {
+                        cb = css;
+                        css = undefined;
+                        locals = undefined;
+                    } else {
+                        if(_.isFunction(locals)) {
+                            cb = locals;
+                            locals = undefined;
+                        }
+                    }
                 }
                 cb = cb || Gnd.Util.noop;
                 var items = [
@@ -3203,13 +3255,17 @@ var Gnd;
                     var args;
                     if(_.isString(locals)) {
                         args[locals] = self.data;
-                    } else if(_.isObject(locals) && !_.isEmpty(locals)) {
-                        args = locals;
-                    } else if(_.isObject(self.data)) {
-                        args = self.data;
                     } else {
-                        args = {
-                        };
+                        if(_.isObject(locals) && !_.isEmpty(locals)) {
+                            args = locals;
+                        } else {
+                            if(_.isObject(self.data)) {
+                                args = self.data;
+                            } else {
+                                args = {
+                                };
+                            }
+                        }
                     }
                     var html = Gnd.using.template(templ)(args);
                     if(self.el) {
@@ -3538,12 +3594,8 @@ var Gnd;
                 el.removeAttribute('id');
                 var addNode = function (item, nextSibling) {
                     var itemNode = el.cloneNode(true), id = item.id(), modelListener = function (newId) {
-                        if(!(newId in mappings)) {
-                            delete mappings[id];
-                            mappings[newId] = itemNode;
-                            Gnd.setAttr(itemNode, 'data-item', newId);
-                        }
-                    };
+if(!(newId in mappings)) {
+delete mappings[id];mappings[newId] = itemNode;Gnd.setAttr(itemNode, 'data-item', newId);                        }                    };
                     item.retain();
                     Gnd.setAttr(itemNode, 'data-item', id);
                     mappings[id] = itemNode;
@@ -3627,8 +3679,7 @@ var Gnd;
                     }
                 }
                 var key = _.rest(keypath).join('.'), modelListener = function (visible) {
-                    setVisibility(visible);
-                };
+setVisibility(visible);                };
                 setVisibility(model.get(key));
                 model.on(key, modelListener);
                 this.bindings.push([
@@ -3788,10 +3839,12 @@ var Gnd;
 ((function (root, factory) {
     if(typeof exports === 'object') {
         root['module'].exports = factory();
-    } else if(typeof define === 'function' && define.amd) {
-        define(factory);
     } else {
-        root.returnExports = factory();
+        if(typeof define === 'function' && define.amd) {
+            define(factory);
+        } else {
+            root.returnExports = factory();
+        }
     }
 })(this, function () {
     return Gnd;
