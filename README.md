@@ -1,7 +1,5 @@
-optimalbits.github.com
-======================
-
 Optimal Bits Webpage
+====================
 
 To run:
     sudo node server.js
