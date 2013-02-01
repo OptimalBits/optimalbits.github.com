@@ -6,4 +6,7 @@ var app = express()
   .use(crawlme())
   .use(express.static(__dirname + '/public'));
 
-http.createServer(app).listen(80);
+var port = process.env['OPTIMALBITS_PORT'] || 80;
+console.log("Listening to port:"+port);
+http.createServer(app).listen(port);
+
