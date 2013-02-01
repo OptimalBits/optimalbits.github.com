@@ -10,11 +10,12 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
   padding:0;
 }
 img,a {
-  outline: :none;
+  outline: none;
+  border: 0;
 }
 .lft {
   float:left;
-  margin: 0em 1em 0em 1em;
+  margin: 0em 1em 0em 0em;
 }
 .rft {
   float:right;
@@ -254,4 +255,13 @@ a, a:visited{
   margin: 6px;
   box-shadow: inset 0px 0px 1px black;
   border-radius: 4px;
+}
+
+.presentation {
+  margin: 2em auto 0em auto;
+  width: 600px;
+}
+
+.presentation .image-wrapper {
+  margin-bottom: 10px;
 }
