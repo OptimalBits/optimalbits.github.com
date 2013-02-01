@@ -1,5 +1,5 @@
-// define(['gnd.min',
-define(['ginger/dist/gnd',
+define(['gnd.min',
+// define(['ginger/dist/gnd',
         'showdown',
         'js!jade.js',
         'js!moment.min.js'], function(Gnd, showdown){
