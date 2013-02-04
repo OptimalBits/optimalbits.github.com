@@ -11,11 +11,11 @@ $(function(){
 
 // Effects
 var fadeOut = function(el, done){
-  $(el).fadeOut(done)
-}
+  $(el).fadeOut(done);
+};
 var fadeIn = function(el, done){
-  $(el).fadeIn(done)
-}
+  $(el).fadeIn(done);
+};
 
 Gnd.Route.listen(function(req){
   req.get(function(){
@@ -27,7 +27,7 @@ Gnd.Route.listen(function(req){
     req
       //.enter(fadeIn)
       .render('/jade/main.jade', '/css/main.css')
-      .exit(fadeOut)
+      .exit(fadeOut);
   
     req.get('news', '#content', function(){
       var data, urls;
@@ -77,7 +77,7 @@ Gnd.Route.listen(function(req){
           req.load(docUrl, function(done){
             for(var i=0, len=data.length;i<len;i++){
               if(data[i].url===docUrl){
-                data[i].content = showdown.parse(req.data)
+                data[i].content = showdown.parse(req.data);
                 data[i].date = moment(data[i].date).fromNow();
                 data[i].url = req.url;
                 break;
@@ -176,7 +176,19 @@ Gnd.Route.listen(function(req){
       req.exit(fadeOut).render('/jade/vision.jade').enter(fadeIn);
     });
     
-  })
+    // Press
+    req.get('press', '#content', function(){
+      if(req.isLast()){
+        req.exit(fadeOut).render('/jade/press.jade').enter(fadeIn);
+      }else{
+        req.get(':id', '#content', function() {
+          req.render('/jade/press/'+req.params.id+'.jade');
+          req.enter(fadeIn);
+          req.exit(fadeOut);
+        });
+      }
+      });
+    });
     
 });
 });

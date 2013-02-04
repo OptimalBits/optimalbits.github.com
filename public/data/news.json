@@ -1,5 +1,10 @@
 [
   {
+  "url":"/data/news/castmill-beta.json",
+  "title":"Castmill beta released",
+  "date":[2013, 1, 5]
+  },
+  {
   "url":"/data/news/new-webpage.json",
   "title":"We finally got our new webpage!",
   "date":[2012, 0, 13]
