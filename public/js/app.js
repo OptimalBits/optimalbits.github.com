@@ -34,7 +34,7 @@ Gnd.Route.listen(function(req){
       
       if(req.isLast()){
         req.before(function(done){
-          curl(['text!/data/news.json'], function(d){
+          curl(['text!/data/news.json?nocached='+(+new Date().getTime())], function(d){
             data = JSON.parse(d);
             req.data = _.pluck(data, 'url');
             done();
