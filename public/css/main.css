@@ -11,6 +11,7 @@ ul,li,ol,p,h1,h2,h3,span,label,div,table,td,tr,form,span,stong,a{
 }
 img,a {
   outline: none;
+  border-style:none;
 }
 .lft {
   float:left;
