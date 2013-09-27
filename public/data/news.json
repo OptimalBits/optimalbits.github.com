@@ -1,5 +1,10 @@
 [
   {
+  "url":"/data/news/android-app.json",
+  "title":"Castmill Player for Android",
+  "date":[2013, 8, 30]
+  },
+  {
   "url":"/data/news/samsung-app.json",
   "title":"Castmill released for Samsung Smart TVs",
   "date":[2013, 6, 25]
