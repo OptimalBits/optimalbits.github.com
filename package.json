@@ -13,7 +13,6 @@
   },
   "dependencies" : {
     "express"   :  "3.x.x",
-    "crawlme" :  "0.0.6"
   },
   "analyze": false,
   "devDependencies": {
